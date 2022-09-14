@@ -4,14 +4,14 @@ Building statistic excercise
 Európa legmagasabb épületei
 A következő feladatban Európa legmagasabb épületeinek adataival kell dolgoznia.
 A megoldás során vegye figyelembe a következőket:
- A képernyőre írást igénylő részfeladatok eredményének megjelenítése előtt írja a
+* A képernyőre írást igénylő részfeladatok eredményének megjelenítése előtt írja a
 képernyőre a feladat sorszámát (például:3. feladat:)!
- Az egyes feladatokban a kiírásokat a minta szerint készítse el!
- Az ékezetmentes kiírás is elfogadott.
- A program megírásakor a fájlban lévő adatok helyes szerkezetét nem kell
+* Az egyes feladatokban a kiírásokat a minta szerint készítse el!
+* Az ékezetmentes kiírás is elfogadott.
+* A program megírásakor a fájlban lévő adatok helyes szerkezetét nem kell
 ellenőriznie, feltételezheti, hogy a rendelkezésre álló adatok a leírtaknak
 megfelelnek.
- Megoldását úgy készítse el, hogy az azonos szerkezetű, de tetszőleges bemeneti
+* Megoldását úgy készítse el, hogy az azonos szerkezetű, de tetszőleges bemeneti
 adatok mellett is helyes eredményt adjon!
 1. A feladat megoldásához hozzon létre grafikus vagy konzolalkalmazást (projektet)
 Legmagasabb azonosítóval!
