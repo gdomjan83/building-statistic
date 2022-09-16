@@ -1,53 +1,50 @@
 package result;
 
 import building.Building;
+import fileinputoutput.FileReader;
+import fileinputoutput.FileWriter;
 
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Result {
     private List<Building> buildings;
     private static final double ONE_METER_IN_FOOT = 3.280839895;
 
     public Result(List<Building> buildings) {
-        this.buildings = buildings;
+        this.buildings = new FileReader().readFile("src/main/resources/legmagasabb-utf8.txt");
     }
 
-    public String getNumberOfBuildings() {
-        int numberOfBuildings = buildings.size();
-        return String.format("Épületek száma: %d db", numberOfBuildings);
+    public int getNumberOfBuildings() {
+        return buildings.size();
     }
 
-    public String getTotalFloors() {
-        int floors = buildings.stream()
+    public int getTotalFloors() {
+        return buildings.stream()
                 .mapToInt(Building::getFloors)
                 .sum();
-        return String.format("Emeletek összege: %d", floors);
     }
 
     public String getHighestBuilding() {
         Building highest = buildings.stream()
                 .max(Comparator.comparingDouble(Building::getHeight))
                 .orElseThrow(() -> new IllegalStateException("Can not determine highest building"));
-        return "A legmagasabb épület adatai:\n" + highest.toString();
+        return highest.toString();
     }
 
-    public String checkForItalianBuilding() {
+    public boolean checkForItalianBuilding() {
         for (Building actual : buildings) {
             if ("Olaszország".equals(actual.getCountry())) {
-                return "Van olasz épület az adatok között.";
+                return true;
             }
         }
-        return "Nincs olasz épület az adatok között.";
+        return false;
     }
 
-    public String countHighBuildings() {
-        long numberOfTallBuildings = buildings.stream()
+    public long countHighBuildings() {
+        return buildings.stream()
                 .filter(b -> b.getHeight() * ONE_METER_IN_FOOT > 666)
                 .count();
-        return String.format("666 lábnál magasabb épületek száma: %d", numberOfTallBuildings);
     }
 
     public String getCountryStatistics() {
@@ -58,17 +55,26 @@ public class Result {
         return extractMap(statistics);
     }
 
+    public String writeFile() {
+        FileWriter writer = new FileWriter();
+        String fileName = "nemet.txt";
+        Set<String> germanCities = buildings.stream()
+                        .filter(b -> "Németország".equals(b.getCountry()))
+                        .map(Building::getCity)
+                        .collect(Collectors.toSet());
+        writer.writeFile(germanCities,fileName);
+        return fileName;
+    }
+
     private String extractMap(Map<String, Integer> buildingMap) {
         List<String> buildingData = buildingMap.entrySet().stream()
                 .map(e -> e.getKey() + " - " + e.getValue() + " db")
                 .toList();
-        StringBuilder sb = new StringBuilder("Ország statisztika\n");
+        StringBuilder sb = new StringBuilder();
         for (String actual : buildingData) {
             sb.append(actual);
             sb.append("\n");
         }
         return sb.toString();
     }
-
-
 }

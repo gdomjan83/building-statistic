@@ -15,7 +15,7 @@ public class Building {
 
     @Override
     public String toString() {
-        return String.format("Név: %s\nVáros: %s\nOrszág: %s\nMagasság: %d m\n, Emeletek száma: %d\nÉpítés éve: %s",
+        return String.format("Név: %s\nVáros: %s\nOrszág: %s\nMagasság: %f m\nEmeletek száma: %d\nÉpítés éve: %s",
                 buildingName, city, country, height, floors, yearOfBuild);
     }
 }
